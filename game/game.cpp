@@ -70,6 +70,18 @@ void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
+bool endCheck(string map[MAP_HEIGHT][MAP_WIDTH]){
+    if (::health <= 0) return true;
+    for (int i = 0; i < MAP_HEIGHT; i++){
+        for (int j = 0; j < MAP_WIDTH; j++){
+            if (map[i][j] == "ƒ"){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 int main() {
     char input;
 
