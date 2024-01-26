@@ -49,6 +49,8 @@ void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
+void moveMobs(st)
+
 int main() {
     system("chcp 65001");
     string map[MAP_HEIGHT][MAP_WIDTH] = {
