@@ -5,6 +5,7 @@
 
 // Цвета текста
 #define RESET   "\033[0m"
+#define BROWN   "\033[0;33m"
 #define BLACK   "\033[30m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -16,6 +17,7 @@
 
 // Цвета фона
 #define BG_RESET   "\033[0m"
+#define BG_BROWN   "\033[48;5;94m"
 #define BG_BLACK   "\033[40m"
 #define BG_RED     "\033[41m"
 #define BG_GREEN   "\033[42m"
@@ -30,7 +32,7 @@
 
 using namespace std;
 
-void printMap(char map[MAP_HEIGHT][MAP_WIDTH]){
+void printMap(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
             cout << map[i][j];
@@ -43,20 +45,18 @@ int main() {
     system("chcp 65001");
     string map[MAP_HEIGHT][MAP_WIDTH] = {
             {"#", "#","#", "#", "#","#"},
-            {"#"," "," "," "," ","_"},
-            {"#"," "," "," "," ","#"},
-            {"#"," "," "," "," ","#"},
+            {"#"," ","[1]"," "," ","_"},
+            {"#","†"," "," "," ","#"},
+            {"#"," ","[2]"," "," ","#"},
             {"#"," "," "," "," ","#"},
             {"#", "#","#", "#", "#","#"},
     };
-
-    printMap(map);
 
     system("clear");
     system("cls");
     char input;
     while(true) {
-        cout << "Символьная оборона" << endl;
+        cout<< "Символьная оборона" << endl;
         cout<<endl;
         cout<<"Главное меню"<<endl;
         cout<<"1. Играть"<<endl;
@@ -71,7 +71,9 @@ int main() {
                 this_thread::sleep_for(chrono::nanoseconds(5000000000));
                 cout << "\x1B[2J\x1B[H";
                 cout<< "Сюжет: В мире, где символы обрели силу и стали живыми существами, зловещие коды угрожают всему цифровому королевству. Вы - последний защитник, контролирующий мощные символьные башни, способные отражать атаки зловредных кодов. Ваша миссия - предотвратить вторжение и спасти мир от цифрового хаоса."<< endl;
-
+                this_thread::sleep_for(chrono::nanoseconds(5000000000));
+                printMap(map);
+                cin >> input;
             case '2':
                 cout << "\x1B[2J\x1B[H";
                 cout<<"Выберите желаемый уровень:"<<endl;
