@@ -50,7 +50,26 @@ void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
-
+void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
+    for (int i = 0; i < MAP_HEIGHT; i++){
+        for (int j = 0; j < MAP_WIDTH; j++){
+            if (map[i][j] == "ƒ"){
+                if (map[i][j-1] == BG_BROWN && map[i][j-1] == " "){
+                    map[i][j-1] = "ƒ";
+                    map[i][j] = " ";
+                }
+                else if (map[i+1][j] == BG_BROWN && map[i+1][j] == " "){
+                    map[i+1][j] = "ƒ";
+                    map[i][j] = " ";
+                }
+                else if (map[i-1][j] == BG_BROWN && map[i-1][j] == " "){
+                    map[i-1][j] = "ƒ";
+                    map[i][j] = " ";
+                }
+            }
+        }
+    }
+}
 
 int main() {
     system("chcp 65001");
