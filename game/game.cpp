@@ -2,6 +2,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
+
 // Цвета текста
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"
@@ -24,10 +25,30 @@
 #define BG_CYAN    "\033[46m"
 #define BG_WHITE   "\033[47m"
 
+#define MAP_WIDTH 6
+#define MAP_HEIGHT 3
+
 using namespace std;
+
+void printMap(char map[MAP_HEIGHT][MAP_WIDTH]){
+    for (int i = 0; i < MAP_HEIGHT; i++){
+        for (int j = 0; j < MAP_WIDTH; j++){
+            cout << map[i][j];
+        }
+        cout << endl;
+    }
+}
 
 int main() {
     system("chcp 65001");
+    char map[MAP_HEIGHT][MAP_WIDTH] = {
+            {'#', '#', '#', '#', '#', '#'},
+            {'|', ' ', ' ', ' ', ' ', '_'},
+            {'#', '#', '#', '#', '#', '#'}
+    };
+
+    printMap(map);
+
     system("clear");
     system("cls");
     char input;
