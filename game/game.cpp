@@ -16,6 +16,7 @@
 
 // Цвета фона
 #define BG_RESET   "\033[0m"
+#define BG_BROWN   "\033[48;5;94m"
 #define BG_BLACK   "\033[40m"
 #define BG_RED     "\033[41m"
 #define BG_GREEN   "\033[42m"
