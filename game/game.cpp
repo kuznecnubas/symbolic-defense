@@ -114,7 +114,7 @@ int main() {
                     moveMobs(map);
                     this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
                 }
-                while(!endCheck(map)){
+                while(!endCheck()){
                     printMap(map);
                     moveMobs(map);
                     cout<<health;
