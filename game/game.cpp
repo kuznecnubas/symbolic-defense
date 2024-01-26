@@ -26,8 +26,8 @@
 #define BG_CYAN    "\033[46m"
 #define BG_WHITE   "\033[47m"
 
-#define MAP_WIDTH 6
-#define MAP_HEIGHT 6
+#define MAP_WIDTH 9
+#define MAP_HEIGHT 9
 
 using namespace std;
 
@@ -55,12 +55,12 @@ void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
 int main() {
     system("chcp 65001");
     string map[MAP_HEIGHT][MAP_WIDTH] = {
-            {"#", "#","#", "#", "#","#"},
-            {"#"," "," "," "," ","_"},
-            {"#"," "," "," "," ","#"},
-            {"#"," † ",BG_BROWN "" ," "," " RESET,"#"},
-            {"#"," "," "," "," ","#"},
-            {"#", "#","#", "#", "#","#"},
+            {"#", "#","#", "#", "#","#"," "," "," "},
+            {"#"," "," "," "," "," "," "," ","_"},
+            {"#"," "," "," "," "," "," "," ","#"},
+            {"#"," † ",BG_BROWN "" ," "," " RESET," "," "," ","#"},
+            {"#"," "," "," "," "," "," "," ","#"},
+            {"#", "#","#", "#", "#"," "," "," ","#"},
     };
 
     system("clear");
