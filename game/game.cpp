@@ -26,7 +26,7 @@
 #define BG_WHITE   "\033[47m"
 
 #define MAP_WIDTH 6
-#define MAP_HEIGHT 3
+#define MAP_HEIGHT 6
 
 using namespace std;
 
@@ -41,10 +41,13 @@ void printMap(char map[MAP_HEIGHT][MAP_WIDTH]){
 
 int main() {
     system("chcp 65001");
-    char map[MAP_HEIGHT][MAP_WIDTH] = {
-            {'#', '#', '#', '#', '#', '#'},
-            {'|', ' ', ' ', ' ', ' ', '_'},
-            {'#', '#', '#', '#', '#', '#'}
+    string map[MAP_HEIGHT][MAP_WIDTH] = {
+            {"#", "#","#", "#", "#","#"},
+            {"#"," "," "," "," ","_"},
+            {"#"," "," "," "," ","#"},
+            {"#"," "," "," "," ","#"},
+            {"#"," "," "," "," ","#"},
+            {"#", "#","#", "#", "#","#"},
     };
 
     printMap(map);
