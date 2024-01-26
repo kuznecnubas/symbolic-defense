@@ -86,7 +86,7 @@ int main() {
     string map[MAP_HEIGHT][MAP_WIDTH] = {
             {"#", "#","#", "#", "#","#","#","#","#"},
             {"#"," ","1"," ","3"," ","5"," ","#"},
-            {"†","|"," " ,".",".",".",".",".","_"},
+            {"†","|","." ,".",".",".",".",".","_"},
             {"#"," "," ","2"," ","4"," "," ","#"},
             {"#", "#","#", "#", "#","#","#","#","#"},
     };
@@ -108,12 +108,19 @@ int main() {
                 cout<<"Приятной игры"<<endl;
                 cout << "\x1B[2J\x1B[H";
                 cout<< "Сюжет: В мире, где символы обрели силу и стали живыми существами, зловещие коды угрожают всему цифровому королевству. Вы - последний защитник, контролирующий мощные символьные башни, способные отражать атаки зловредных кодов. Ваша миссия - предотвратить вторжение и спасти мир от цифрового хаоса."<< endl;
-                printMap(map);
-                spawnMob(map);
-                printMap(map);
-                moveMobs(map);
-                printMap(map);
-                cin >> input;
+                for(int i =0; i<5;i++){
+                    printMap(map);
+                    spawnMob(map);
+                    moveMobs(map);
+                    this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
+                }
+                while(!endCheck(map)){
+                    printMap(map);
+                    moveMobs(map);
+                    cout<<health;
+                    this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
+                }
+
             case '2':
                 cout << "\x1B[2J\x1B[H";
                 cout<<"Выберите желаемый уровень:"<<endl;
