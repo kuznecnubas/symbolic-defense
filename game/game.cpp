@@ -91,7 +91,7 @@ int main() {
         cout<<"1. Играть"<<endl;
         cout<<"2. Выбор уровня"<<endl;
         cout<<"0. Выход"<<endl;
-        cin>>input;
+        cin >> input;
         switch (input) {
             case '0':
                 return 0;
