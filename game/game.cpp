@@ -55,17 +55,10 @@ void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
             if (map[i][j] == "ƒ"){
-                if (map[i][j-1] == BG_BROWN && map[i][j-1] == " "){
+                if (map[i][j-1] == "."){
                     map[i][j-1] = "ƒ";
-                    map[i][j] = " ";
-                }
-                else if (map[i+1][j] == BG_BROWN && map[i+1][j] == " "){
-                    map[i+1][j] = "ƒ";
-                    map[i][j] = " ";
-                }
-                else if (map[i-1][j] == BG_BROWN && map[i-1][j] == " "){
-                    map[i-1][j] = "ƒ";
-                    map[i][j] = " ";
+                    map[i][j] = ".";
+                    return;
                 }
             }
         }
@@ -101,6 +94,10 @@ int main() {
                 cout<<"Приятной игры"<<endl;
                 cout << "\x1B[2J\x1B[H";
                 cout<< "Сюжет: В мире, где символы обрели силу и стали живыми существами, зловещие коды угрожают всему цифровому королевству. Вы - последний защитник, контролирующий мощные символьные башни, способные отражать атаки зловредных кодов. Ваша миссия - предотвратить вторжение и спасти мир от цифрового хаоса."<< endl;
+                printMap(map);
+                spawnMob(map);
+                printMap(map);
+                moveMobs(map);
                 printMap(map);
                 cin >> input;
             case '2':
