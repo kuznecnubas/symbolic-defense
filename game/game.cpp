@@ -29,7 +29,7 @@
 
 #define MAP_WIDTH 9
 #define MAP_HEIGHT 9
-
+int money = 0;
 int health = 5;
 
 using namespace std;
@@ -80,7 +80,7 @@ bool endCheck(){
 }
 
 int main() {
-    char input;
+    int input;
 
     system("chcp 65001");
     string map[MAP_HEIGHT][MAP_WIDTH] = {
@@ -101,27 +101,37 @@ int main() {
         cout<<"2. Выбор уровня"<<endl;
         cout<<"0. Выход"<<endl;
         cin >> input;
-        switch (input) {
-            case '0':
-                return 0;
-            case '1':
+        if(input==1){
                 cout<<"Приятной игры"<<endl;
                 cout << "\x1B[2J\x1B[H";
                 cout<< "Сюжет: В мире, где символы обрели силу и стали живыми существами, зловещие коды угрожают всему цифровому королевству. Вы - последний защитник, контролирующий мощные символьные башни, способные отражать атаки зловредных кодов. Ваша миссия - предотвратить вторжение и спасти мир от цифрового хаоса."<< endl;
                 for(int i =0; i<5;i++){
+                    cout << "\x1B[2J\x1B[H";
                     printMap(map);
                     spawnMob(map);
                     moveMobs(map);
+                    cout<<"Ваши деньги: "<<money<<endl;
+                    cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
+                    cout<<endl;
                     this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
                 }
                 while(!endCheck()){
+                    cout << "\x1B[2J\x1B[H";
                     printMap(map);
                     moveMobs(map);
-                    cout<<health;
+                    cout<<"Ваши деньги: "<<money<<endl;
+                    cout<<"Жизнь церкви: "<<health<<" hp";
+                    cout<<endl;
                     this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
                 }
-
-            case '2':
+                thread d([&](){
+                    cout<<"Выберите действие: "<<endl;
+                    cout<<"1. Купить башню"<<endl;
+                    cout<<"1. Обновить башню"<<endl;
+                    cin>>input;
+                });
+                d.join();}
+        else if(input==2){
                 cout << "\x1B[2J\x1B[H";
                 cout<<"Выберите желаемый уровень:"<<endl;
                 cout<<"1. Уровень"<<endl;
@@ -131,6 +141,8 @@ int main() {
                         cout<<"1. Уровень"<<endl;
                         break;
                 }
+        }else if(input==0){
+            return 0;
         }
     }
 }
