@@ -20,6 +20,7 @@
 #define BG_BLACK   "\033[40m"
 #define BG_RED     "\033[41m"
 #define BG_GREEN   "\033[42m"
+#define BG_DARK_GREEN   "\033[48;5;22m"
 #define BG_YELLOW  "\033[43m"
 #define BG_BLUE    "\033[44m"
 #define BG_MAGENTA "\033[45m"
@@ -55,12 +56,12 @@ void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
 int main() {
     system("chcp 65001");
     string map[MAP_HEIGHT][MAP_WIDTH] = {
-            {"#", "#","#", "#", "#","#"," "," "," "},
-            {"#"," "," "," "," "," "," "," ","_"},
-            {"#"," "," "," "," "," "," "," ","#"},
-            {"#"," † ",BG_BROWN "" ," "," " RESET," "," "," ","#"},
-            {"#"," "," "," "," "," "," "," ","#"},
-            {"#", "#","#", "#", "#"," "," "," ","#"},
+            {"#", "###","#", "#", "#","#","#","#","#"},
+            {"#",BG_DARK_GREEN"   "," "," "," "," "," " BG_BROWN," ",RESET"_"},
+            {"#",BG_DARK_GREEN"   "," "," "," "," "," " BG_BROWN," ",RESET"#"},
+            {"#",BG_DARK_GREEN" † " BG_BROWN," " ," "," "," "," "," ",RESET"#"},
+            {"#",BG_DARK_GREEN"   "," "," "," "," "," "," ",RESET"#"},
+            {"#", "###","#", "#", "#","#","#","#","#"},
     };
 
     system("clear");
