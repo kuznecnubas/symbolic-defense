@@ -70,7 +70,7 @@ void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
-bool endCheck(string map[MAP_HEIGHT][MAP_WIDTH]){
+bool endCheck(){
     if (::health <= 0) {
         return true;
     }
