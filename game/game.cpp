@@ -30,12 +30,22 @@
 
 using namespace std;
 
-void printMap(char map[MAP_HEIGHT][MAP_WIDTH]){
+void printMap(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
             cout << map[i][j];
         }
         cout << endl;
+    }
+}
+
+void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
+    for (int i = 0; i < MAP_HEIGHT; i++){
+        for (int j = 0; j < MAP_WIDTH; j++){
+            if (map[i][j] == "_"){
+                map[i][j-1] = "ƒ";
+            }
+        }
     }
 }
 
@@ -50,7 +60,6 @@ int main() {
             {"#", "#","#", "#", "#","#"},
     };
 
-    printMap(map);
 
     system("clear");
     system("cls");
