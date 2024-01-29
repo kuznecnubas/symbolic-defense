@@ -29,8 +29,8 @@
 
 #define MAP_WIDTH 9
 #define MAP_HEIGHT 9
-int money = 0;
-int health = 5;
+int money;
+int health;
 std::string input;
 
 using namespace std;
@@ -95,11 +95,111 @@ bool endCheck(){
     }
 }
 
+void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
+    string tower, towerPlace;
+    ::health = 5; ::money = 100;
+    for(int i =0; i<5;i++){
+        clearConsole();
+        printMap(map);
+        spawnMob(map);
+        moveMobs(map);
+
+        cout<<"Ваши монеты: "<<money<<endl;
+        cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
+        cout<<endl;
+        cout << "Выберите действие" << endl;
+        cout<<"1. Купить башню"<<endl;
+        cout<<"2. Улучшить башню"<<endl;
+        if(::input == "1"){
+            ::input = "/";
+
+            clearConsole();
+            printMap(map);
+            cout << "Покупка башни" << endl;
+            cout << "Ваши монеты: " << ::money << endl << endl;
+            cout << "1. Огнемёт = 100 монет" << endl;
+            cout << endl << "Выберите башню:" << endl;
+            this_thread::sleep_for(std::chrono::seconds(3));
+            tower = ::input;
+            cout << "Выберите номер места для башни:" << endl;
+            this_thread::sleep_for(std::chrono::seconds(3));
+            towerPlace = ::input;
+            if (::money >= 100){
+                spawnTower(map, ::input);
+                money -= 100;
+            }
+            else{
+                cout << "Недостаточно монет" << endl;
+            }
+            ::input = " ";
+        }
+        else if(::input == "2") {
+            ::input = "/";
+
+            clearConsole();
+            printMap(map);
+            cout<<"Улучшение башни"<<endl;
+            cout << "Функция пока не доступна" << endl;
+            this_thread::sleep_for(std::chrono::seconds(2));
+            ::input = " ";
+        }
+        else if(::input == "0"){
+            ::health = 0;
+        }
+        this_thread::sleep_for(std::chrono::seconds(2));
+    }
+    while (!endCheck()) {
+        clearConsole();
+        printMap(map);
+        moveMobs(map);
+
+        cout<<"Ваши деньги: "<<money<<endl;
+        cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
+        cout<<endl;
+        cout << "Выберите действие" << endl;
+        cout<<"1. Купить башню"<<endl;
+        cout<<"2. Улучшить башню"<<endl;
+        if(::input == "1"){
+            ::input = "/";
+
+            clearConsole();
+            printMap(map);
+            cout << "Покупка башни" << endl;
+            cout << "Ваши монеты: " << ::money << endl << endl;
+            cout << "1. Огнемёт = 100 монет" << endl;
+            cout << endl << "Выберите башню:" << endl;
+            this_thread::sleep_for(std::chrono::seconds(3));
+            tower = ::input;
+            cout << "Выберите номер места для башни:" << endl;
+            this_thread::sleep_for(std::chrono::seconds(3));
+            towerPlace = ::input;
+            spawnTower(map, ::input);
+            money -= 100;
+            ::input = " ";
+        }
+        else if(::input == "2") {
+            ::input = "/";
+
+            clearConsole();
+            printMap(map);
+            cout<<"Улучшение башни"<<endl;
+            cout << "Функция пока не доступна" << endl;
+            this_thread::sleep_for(std::chrono::seconds(2));
+            ::input = " ";
+        }
+        else if(::input == "0"){
+            ::health = 0;
+        }
+        this_thread::sleep_for(std::chrono::seconds(2));
+    }
+}
+
 void checkingInput() {
     while(!endCheck()){
         cin>>::input;
     }
 }
+
 int main() {
 
     system("chcp 65001");
@@ -112,6 +212,7 @@ int main() {
     };
     clearConsole();
     while(true) {
+        input = "/";
         clearConsole();
         cout << "Символьная оборона" << endl;
         cout << endl;
@@ -132,75 +233,7 @@ int main() {
             cout << "Введите любой символ чтобы продолжить: "; cin >> input;
             thread secondThread(checkingInput);
             ::input = " ";
-            for(int i =0; i<5;i++){
-                clearConsole();
-                printMap(map);
-                spawnMob(map);
-                moveMobs(map);
-
-                cout<<"Ваши деньги: "<<money<<endl;
-                cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
-                cout<<endl;
-                cout << "Выберите действие" << endl;
-                cout<<"1. Купить башню"<<endl;
-                cout<<"2. Улучшить башню"<<endl;
-                if(::input == "1"){
-                    ::input = "/";
-
-                    clearConsole();
-                    printMap(map);
-                    cout<<"Покупка башни"<<endl;
-                    cout << "Выберите номер башни:" << endl;
-                    this_thread::sleep_for(std::chrono::seconds(2));
-                    spawnTower(map, ::input);
-                    ::input = " ";
-                }
-                else if(::input == "2") {
-                    ::input = "/";
-
-                    clearConsole();
-                    printMap(map);
-                    cout<<"Улучшение башни"<<endl;
-                    cout << "Функция пока не доступна" << endl;
-                    this_thread::sleep_for(std::chrono::seconds(2));
-                    ::input = " ";
-                }
-                this_thread::sleep_for(std::chrono::seconds(2));
-            }
-            while (!endCheck()) {
-                clearConsole();
-                printMap(map);
-                moveMobs(map);
-
-                cout<<"Ваши деньги: "<<money<<endl;
-                cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
-                cout<<endl;
-                cout << "Выберите действие" << endl;
-                cout<<"1. Купить башню"<<endl;
-                cout<<"2. Улучшить башню"<<endl;
-                if(::input == "1"){
-                    ::input = "/";
-
-                    clearConsole();
-                    printMap(map);
-                    cout<<"Покупка башни"<<endl;
-                    cout << "Выберите номер башни:" << endl;
-                    this_thread::sleep_for(std::chrono::seconds(2));
-                    spawnTower(map, ::input);
-                    ::input = " ";
-                }
-                else if(::input == "2") {
-                    ::input = "/";
-
-                    clearConsole();
-                    printMap(map);
-                    cout<<"Улучшение башни"<<endl;
-                    cout << "Функция пока не доступна" << endl;
-                    this_thread::sleep_for(std::chrono::seconds(2));
-                    ::input = " ";
-                }
-                this_thread::sleep_for(std::chrono::seconds(2));
-            }
+            runningGame(map);
             secondThread.join();
         }
         else if(input == "2"){
@@ -213,40 +246,7 @@ int main() {
             if (input == "1"){
                 thread secondThread(checkingInput);
                 input = "/";
-                while (!endCheck()) {
-                    clearConsole();
-                    printMap(map);
-                    moveMobs(map);
-
-                    cout<<"Ваши деньги: "<<money<<endl;
-                    cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
-                    cout<<endl;
-                    cout << "Выберите действие" << endl;
-                    cout<<"1. Купить башню"<<endl;
-                    cout<<"2. Улучшить башню"<<endl;
-                    if(::input == "1"){
-                        ::input = "/";
-
-                        clearConsole();
-                        printMap(map);
-                        cout<<"Покупка башни"<<endl;
-                        cout << "Выберите номер башни:" << endl;
-                        this_thread::sleep_for(std::chrono::seconds(2));
-                        spawnTower(map, ::input);
-                        ::input = " ";
-                    }
-                    else if(::input == "2") {
-                        ::input = "/";
-
-                        clearConsole();
-                        printMap(map);
-                        cout<<"Улучшение башни"<<endl;
-                        cout << "Функция пока не доступна" << endl;
-                        this_thread::sleep_for(std::chrono::seconds(2));
-                        ::input = " ";
-                    }
-                    this_thread::sleep_for(std::chrono::seconds(2));
-                }
+                runningGame(map);
                 secondThread.join();
             }
         }
