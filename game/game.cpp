@@ -52,14 +52,13 @@ int damage[MAP_HEIGHT][MAP_WIDTH]={
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 };
 string map_mobs[MAP_HEIGHT][MAP_WIDTH] = {
-        {"#", "#","#", "#", "#","#","#","#","#", "#","#", "#", "#","#","#","#", "#","#", "#"},
+        {"#", "#","#", "#", "#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"},
         {"#"," ","1"," ","3"," ","5"," "," "," "," "," "," "," "," "," "," "," ","#"},
-        {"†","|","." ,".",".",".","."," "," "," "," "," "," "," "," "," "," "," ","_"},
+        {"†","|","." ,".",".",".",".",".",".",".",".",".",".",".",".",".",".",".","_"},
         {"#"," "," ","2"," ","4"," "," "," "," "," "," "," "," "," "," "," "," ","#"},
-        {"#", "#","#", "#", "#","#","#","#","#", "#","#", "#", "#","#","#","#", "#","#", "#"}
+        {"#", "#","#", "#", "#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"},
 };
 void clearConsole(){
     system("clear");
@@ -137,6 +136,7 @@ void printMap(string map[MAP_HEIGHT][MAP_WIDTH]){
         cout << endl;
     }
 }
+
 void printMap1(string map_mobs[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
@@ -145,6 +145,7 @@ void printMap1(string map_mobs[MAP_HEIGHT][MAP_WIDTH]){
         cout << endl;
     }
 }
+
 void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
@@ -179,7 +180,6 @@ void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
-
 void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place){
     string placen = place;
     for (int i = 0; i < MAP_HEIGHT; i++){
@@ -188,15 +188,33 @@ void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place){
                 map[i][j] = "@";
             }
             if(placen=="1"){
-                damage[2][3]+=50;
                 damage[2][2]+=50;
+                damage[2][3]+=50;
+                placen="0";
+            }else if(placen=="2"){
+                damage[2][2]+=50;
+                damage[2][3]+=50;
+                damage[2][4]+=50;
+                placen="0";
+            }else if(placen=="3"){
+                damage[2][3]+=50;
+                damage[2][4]+=50;
+                damage[2][5]+=50;
+                placen="0";
+            }else if(placen=="4"){
+                damage[2][4]+=50;
+                damage[2][5]+=50;
+                damage[2][6]+=50;
+                placen="0";
+            }else if(placen=="5"){
+                damage[2][5]+=50;
+                damage[2][6]+=50;
+                damage[2][7]+=50;
                 placen="0";
             }
         }
     }
 }
-
-
 
 bool endCheck(){
     if (::health <= 0) {
@@ -214,15 +232,16 @@ void checkingInput() {
     }
 
 }
+
 void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
     string tower, towerPlace;
     ::health = 5; ::money = 100;
     for(int i =0; i<5;i++){
         clearConsole();
-        printMap(map);
         spawnMob(map);
         moveMobs(map);
-        //printMap1(map_mobs);
+        printMap(map);
+
         cout<<"Ваши монеты: "<<money<<endl;
         cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
         cout<<endl;
@@ -269,9 +288,9 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
     while (!endCheck()) {
         clearConsole();
-        printMap(map);
         moveMobs(map);
-        //printMap1(map_mobs);
+        printMap(map);
+
         cout<<"Ваши деньги: "<<money<<endl;
         cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
         cout<<endl;
@@ -317,11 +336,11 @@ int main() {
 
     system("chcp 65001");
     string map[MAP_HEIGHT][MAP_WIDTH] = {
-            {"#", "#","#", "#", "#","#","#","#","#", "#","#", "#", "#","#","#","#", "#","#", "#"},
+            {"#", "#","#", "#", "#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"},
             {"#"," ","1"," ","3"," ","5"," "," "," "," "," "," "," "," "," "," "," ","#"},
             {"†","|","." ,".",".",".",".",".",".",".",".",".",".",".",".",".",".",".","_"},
             {"#"," "," ","2"," ","4"," "," "," "," "," "," "," "," "," "," "," "," ","#"},
-            {"#", "#","#", "#", "#","#","#","#","#", "#","#", "#", "#","#","#","#", "#","#", "#"}
+            {"#", "#","#", "#", "#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"},
     };
     clearConsole();
     while(true) {
