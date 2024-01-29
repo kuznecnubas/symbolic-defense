@@ -31,9 +31,14 @@
 #define MAP_HEIGHT 9
 int money = 0;
 int health = 5;
-int input;
+std::string input;
 
 using namespace std;
+
+void clearConsole(){
+    system("clear");
+    system("cls");
+}
 
 void printMap(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
@@ -108,75 +113,75 @@ int main() {
             {"#"," "," ","2"," ","4"," "," ","#"},
             {"#", "#","#", "#", "#","#","#","#","#"},
     };
-
-    system("clear");
-    system("cls");
+    clearConsole();
     while(true) {
         cout << "Символьная оборона" << endl;
-        cout<<endl;
-        cout<<"Главное меню"<<endl;
-        cout<<"1. Играть"<<endl;
-        cout<<"2. Выбор уровня"<<endl;
-        cout<<"0. Выход"<<endl;
-        cin >> input;
-        if(input==1) {
-            input =0;
+        cout << endl;
+        cout << "1. Играть"<<endl;
+        cout << "2. Выбор уровня"<<endl;
+        cout << "0. Выход"<<endl;
+        cout << endl;
+        cout << "Выберите пункт меню: "; cin >> input;
+        if(input == "1") {
+            clearConsole();
             cout << "Приятной игры" << endl;
-            cout << "\x1B[2J\x1B[H";
+            this_thread::sleep_for(std::chrono::seconds(1));
+            clearConsole();
             cout
                     << "В мире, где символы обрели силу и стали живыми существами, зловещие коды угрожают всему цифровому королевству. Вы - последний защитник, контролирующий мощные символьные башни, способные отражать атаки зловредных кодов. Ваша миссия - предотвратить вторжение и спасти мир от цифрового хаоса."
                     << endl;
+            this_thread::sleep_for(std::chrono::seconds(3));
+            cout << "Введите любой символ чтобы продолжить: "; cin >> input;
             thread secondThread(checkingInput);
-            for(int i =0; i<5;i++){
-                cout << "\x1B[2J\x1B[H";
+//            for(int i =0; i<5;i++){
+//                clearConsole();
+//                printMap(map);
+//                spawnMob(map);
+//                moveMobs(map);
+//
+//                cout<<"Ваши деньги: "<<money<<endl;
+//                cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
+//                cout<<endl;
+//                cout<<"1. Купить башню"<<endl;
+//                cout<<"2. Улучшить башню"<<endl;
+//                cout<<"Выберите действие: ";
+//                if(::input == "1"){
+//                    clearConsole();
+//                    printMap(map);
+//                    cout<<"Покупка башни"<<endl;
+//                    cin >> input;
+//                }else if(::input == "2") {
+//                    cout << "Улучшение башни";
+//                }
+//                this_thread::sleep_for(std::chrono::seconds(2));
+//            }
+            while (!endCheck()) {
+                clearConsole();
                 printMap(map);
-                spawnMob(map);
                 moveMobs(map);
+
                 cout<<"Ваши деньги: "<<money<<endl;
                 cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
                 cout<<endl;
-                cout<<"Выберите действие: "<<endl;
+                cout << "Выберите действие" << endl;
                 cout<<"1. Купить башню"<<endl;
                 cout<<"2. Улучшить башню"<<endl;
-                if(::input ==1){
+                if(::input == "1"){
+                    clearConsole();
+                    printMap(map);
                     cout<<"Покупка башни"<<endl;
-                }else if(::input ==2) {
+                    cin >> input;
+                }else if(::input == "2") {
                     cout << "Улучшение башни";
                 }
-                this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
-            }
-            while (!endCheck()) {
-
-                cout << "\x1B[2J\x1B[H";
-                printMap(map);
-                moveMobs(map);
-                cout << "Ваши деньги: " << money << endl;
-                cout << "Жизнь церкви: " << health << " hp";
-                cout << endl;
-
-                cout<<"Выберите действие: "<<endl;
-                cout<<"1. Купить башню"<<endl;
-                cout<<"2. Улучшить башню"<<endl;
-                if(::input ==1){
-                    cout<<"Покупка башни"<<endl;
-
-                }else if(::input ==2) {
-                    cout << "Улучшение башни";
-                }
-                this_thread::sleep_for(std::chrono::nanoseconds(5000000000));
+                this_thread::sleep_for(std::chrono::seconds(2));
             }
             secondThread.join();
-        }else if(input==2){
-                cout << "\x1B[2J\x1B[H";
-                cout<<"Выберите желаемый уровень:"<<endl;
-                cout<<"1. Уровень"<<endl;
-                cin >> input;
-                switch (input) {
-                    case '1':
-                        cout<<"1. Уровень"<<endl;
-                        break;
-                }
-        }else if(input==0){
+        }
+        else if(input == "2"){
+
+        }
+        else if(input == "0"){
             return 0;
         }
     }
