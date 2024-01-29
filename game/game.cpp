@@ -31,6 +31,7 @@
 #define MAP_HEIGHT 9
 int money = 0;
 int health = 5;
+int input;
 
 using namespace std;
 
@@ -70,6 +71,18 @@ void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
+void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place){
+    for (int i = 0; i < MAP_HEIGHT; i++){
+        for (int j = 0; j < MAP_WIDTH; j++){
+            if (map[i][j] == place){
+                map[i][j] = "@";
+            }
+        }
+    }
+}
+
+
+
 bool endCheck(){
     if (::health <= 0) {
         return true;
@@ -78,22 +91,15 @@ bool endCheck(){
         return false;
     }
 }
-int input;
+
 void myFunction() {
     while(!endCheck()){
         cin>>::input;
-        if(::input ==1){
-            cout<<"покупка башни"<<endl;
-        }else if(::input ==2) {
-            cout << "обновка башни";
-        }
 
     }
 
 }
 int main() {
-
-
     system("chcp 65001");
     string map[MAP_HEIGHT][MAP_WIDTH] = {
             {"#", "#","#", "#", "#","#","#","#","#"},
@@ -153,6 +159,7 @@ int main() {
                 cout<<"2. Обновить башню"<<endl;
                 if(::input ==1){
                     cout<<"покупка башни"<<endl;
+
                 }else if(::input ==2) {
                     cout << "обновка башни";
                 }
