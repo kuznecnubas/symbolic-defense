@@ -132,28 +132,41 @@ int main() {
             cout << "Введите любой символ чтобы продолжить: "; cin >> input;
             thread secondThread(checkingInput);
             ::input = " ";
-//            for(int i =0; i<5;i++){
-//                clearConsole();
-//                printMap(map);
-//                spawnMob(map);
-//                moveMobs(map);
-//
-//                cout<<"Ваши деньги: "<<money<<endl;
-//                cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
-//                cout<<endl;
-//                cout<<"1. Купить башню"<<endl;
-//                cout<<"2. Улучшить башню"<<endl;
-//                cout<<"Выберите действие: ";
-//                if(::input == "1"){
-//                    clearConsole();
-//                    printMap(map);
-//                    cout<<"Покупка башни"<<endl;
-//                    cin >> input;
-//                }else if(::input == "2") {
-//                    cout << "Улучшение башни";
-//                }
-//                this_thread::sleep_for(std::chrono::seconds(2));
-//            }
+            for(int i =0; i<5;i++){
+                clearConsole();
+                printMap(map);
+                spawnMob(map);
+                moveMobs(map);
+
+                cout<<"Ваши деньги: "<<money<<endl;
+                cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
+                cout<<endl;
+                cout << "Выберите действие" << endl;
+                cout<<"1. Купить башню"<<endl;
+                cout<<"2. Улучшить башню"<<endl;
+                if(::input == "1"){
+                    ::input = "/";
+
+                    clearConsole();
+                    printMap(map);
+                    cout<<"Покупка башни"<<endl;
+                    cout << "Выберите номер башни:" << endl;
+                    this_thread::sleep_for(std::chrono::seconds(2));
+                    spawnTower(map, ::input);
+                    ::input = " ";
+                }
+                else if(::input == "2") {
+                    ::input = "/";
+
+                    clearConsole();
+                    printMap(map);
+                    cout<<"Улучшение башни"<<endl;
+                    cout << "Функция пока не доступна" << endl;
+                    this_thread::sleep_for(std::chrono::seconds(2));
+                    ::input = " ";
+                }
+                this_thread::sleep_for(std::chrono::seconds(2));
+            }
             while (!endCheck()) {
                 clearConsole();
                 printMap(map);
