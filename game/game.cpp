@@ -137,6 +137,7 @@ void printMap(string map[MAP_HEIGHT][MAP_WIDTH]){
         cout << endl;
     }
 }
+
 void printMap1(string map_mobs[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
@@ -145,6 +146,7 @@ void printMap1(string map_mobs[MAP_HEIGHT][MAP_WIDTH]){
         cout << endl;
     }
 }
+
 void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
@@ -179,7 +181,6 @@ void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
-
 void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place){
     string placen = place;
     for (int i = 0; i < MAP_HEIGHT; i++){
@@ -195,8 +196,6 @@ void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place){
         }
     }
 }
-
-
 
 bool endCheck(){
     if (::health <= 0) {
@@ -214,14 +213,15 @@ void checkingInput() {
     }
 
 }
+
 void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
     string tower, towerPlace;
     ::health = 5; ::money = 100;
     for(int i =0; i<5;i++){
         clearConsole();
-        printMap(map);
         spawnMob(map);
         moveMobs(map);
+        printMap(map);
 
         cout<<"Ваши монеты: "<<money<<endl;
         cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
@@ -269,8 +269,8 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
     while (!endCheck()) {
         clearConsole();
-        printMap(map);
         moveMobs(map);
+        printMap(map);
 
         cout<<"Ваши деньги: "<<money<<endl;
         cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
