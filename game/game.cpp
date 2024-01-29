@@ -27,48 +27,151 @@
 #define BG_CYAN    "\033[46m"
 #define BG_WHITE   "\033[47m"
 
+using namespace std;
 #define MAP_WIDTH 9
 #define MAP_HEIGHT 9
 int money;
 int health;
+int health_mob1 = 100;
+int health_mob2 = 100;
+int health_mob3 = 100;
+int health_mob4 = 100;
+int health_mob5 = 100;
+int health_mob6 = 100;
+int health_mob7 = 100;
+int health_mob8 = 100;
 std::string input;
-
-using namespace std;
-
+int f =0;
+string mobs[100]={"ƒ1","ƒ2","ƒ3","ƒ4","ƒ5","ƒ6","ƒ7","ƒ8","ƒ9","ƒ10","ƒ11"};
+int damage[MAP_HEIGHT][MAP_WIDTH]={
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+};
+string map_mobs[MAP_HEIGHT][MAP_WIDTH] = {
+        {"#", "#","#", "#", "#","#","#","#","#"},
+        {"#"," ","1"," ","3"," ","5"," ","#"},
+        {"†","|","." ,".",".",".",".",".","_"},
+        {"#"," "," ","2"," ","4"," "," ","#"},
+        {"#", "#","#", "#", "#","#","#","#","#"},
+};
 void clearConsole(){
     system("clear");
     system("cls");
+}
+void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map[MAP_HEIGHT][MAP_WIDTH]) {
+    int health0 = 0;
+    if (damage[i][j] > 0) {
+        cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+        if ("ƒ1" == map_mobs[i][j]) {
+            health_mob1 -= damage[i][j];
+            health0 = health_mob1;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        } else if ("ƒ2" == map_mobs[i][j]) {
+            health_mob2 -= damage[i][j];
+            health0 = health_mob2;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        } else if ("ƒ3" == map_mobs[i][j]) {
+            health_mob3 -= damage[i][j];
+            health0 = health_mob3;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        } else if ("ƒ4" == map_mobs[i][j]) {
+            health_mob4 -= damage[i][j];
+            health0 = health_mob4;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        } else if ("ƒ5" == map_mobs[i][j]) {
+            health_mob5 -= damage[i][j];
+            health0 = health_mob5;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        } else if ("ƒ6" == map_mobs[i][j]) {
+            health_mob6 -= damage[i][j];
+            health0 = health_mob6;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        } else if ("ƒ7" == map_mobs[i][j]) {
+            health_mob7 -= damage[i][j];
+            health0 = health_mob7;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        } else if ("ƒ8" == map_mobs[i][j]) {
+            health_mob8 -= damage[i][j];
+            health0 = health_mob8;
+            if(health0 == 0){
+                map_mobs[i][j] = ".";
+                map[i][j] = ".";
+            }
+        }
+    }
 }
 
 void printMap(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
-            cout << map[i][j];
+            cout << "     "<<map[i][j];
         }
         cout << endl;
     }
 }
-
+void printMap1(string map_mobs[MAP_HEIGHT][MAP_WIDTH]){
+    for (int i = 0; i < MAP_HEIGHT; i++){
+        for (int j = 0; j < MAP_WIDTH; j++){
+            cout << "     "<<map_mobs[i][j];
+        }
+        cout << endl;
+    }
+}
 void spawnMob(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
             if (map[i][j] == "_"){
                 map[i][j-1] = "ƒ";
+                map_mobs[i][j-1] =mobs[f];
+                f++;
             }
         }
     }
 }
 
 void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
+
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
             if (map[i][j] == "ƒ"){
                 if (map[i][j-1] == "."){
                     map[i][j-1] = "ƒ";
+                    map_mobs[i][j-1] = map_mobs[i][j];
                     map[i][j] = ".";
+                    map_mobs[i][j] = ".";
+                    towerDamage(i,j-=1,map_mobs,map);
                 }
                 else if (map[i][j-1] == "|"){
                     map[i][j] = ".";
+                    map_mobs[i][j] = ".";
                     ::health -= 1;
                 }
             }
@@ -76,15 +179,24 @@ void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
+
 void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place){
+    string placen = place;
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
             if (map[i][j] == place){
                 map[i][j] = "@";
             }
+            if(placen=="1"){
+                damage[2][3]+=50;
+                damage[2][2]+=50;
+                placen="0";
+            }
         }
     }
 }
+
+
 
 bool endCheck(){
     if (::health <= 0) {
@@ -95,6 +207,13 @@ bool endCheck(){
     }
 }
 
+void checkingInput() {
+    while(!endCheck()){
+        cin>>::input;
+
+    }
+
+}
 void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
     string tower, towerPlace;
     ::health = 5; ::money = 100;
@@ -191,12 +310,6 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
             ::health = 0;
         }
         this_thread::sleep_for(std::chrono::seconds(2));
-    }
-}
-
-void checkingInput() {
-    while(!endCheck()){
-        cin>>::input;
     }
 }
 
