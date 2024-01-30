@@ -52,6 +52,7 @@ int health_mob_w5 = 200;
 int health_mob_w6 = 200;
 int health_mob_w7 = 200;
 int health_mob_w8 = 200;
+int health_mob_boff1 = 450;
 void full_health (){
     health = 5;
     health_mob_f1 = 100;
@@ -70,11 +71,14 @@ void full_health (){
     health_mob_w6 = 200;
     health_mob_w7 = 200;
     health_mob_w8 = 200;
+    health_mob_boff1 = 450;
 }
 std::string input;
-int f =0,W=0,kdd=0;
+int f =0,W=0,kdd=0,boff=0;
+int health0;
 string mobs_f[100]={"ƒ1", "ƒ2", "ƒ3", "ƒ4", "ƒ5", "ƒ6", "ƒ7", "ƒ8", "ƒ9", "ƒ10", "ƒ11", "ƒ12", "ƒ13", "ƒ14", "ƒ15", "ƒ16", "ƒ17", "ƒ18", "ƒ19", "ƒ20"};
 string mobs_W[100]={"₩1", "₩2", "₩3", "₩4", "₩5", "₩6", "₩7", "₩8", "₩9", "₩10", "₩11", "₩12", "₩13", "₩14", "₩15", "₩16", "₩17", "₩18", "₩19", "₩20", "₩1"};
+string mobs_boff[100]={"֏1"};
 int kd[100]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50};
 int damage[MAP_HEIGHT][MAP_WIDTH]={
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -97,13 +101,14 @@ void clearConsole(){
     system("clear");
     system("cls");
 }
+
 void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map[MAP_HEIGHT][MAP_WIDTH],int money_get) {
     int health0 = 0;
     if (damage[i][j] > 0) {
         // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
         if ("ƒ1" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f1 -= damage[i][j];
                 health0 = health_mob_f1;
@@ -115,7 +120,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f1 -= damage[i][j];
                 health0 = health_mob_f1;
                 if(health0 <= 0){
@@ -126,7 +131,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("ƒ2" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f2 -= damage[i][j];
                 health0 = health_mob_f2;
@@ -138,7 +143,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+                //cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f2 -= damage[i][j];
                 health0 = health_mob_f2;
                 if(health0 <= 0){
@@ -149,7 +154,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("ƒ3" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f3 -= damage[i][j];
                 health0 = health_mob_f3;
@@ -161,7 +166,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f3 -= damage[i][j];
                 health0 = health_mob_f3;
                 if(health0 <= 0){
@@ -172,7 +177,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("ƒ4" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f4 -= damage[i][j];
                 health0 = health_mob_f4;
@@ -184,7 +189,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f4 -= damage[i][j];
                 health0 = health_mob_f4;
                 if(health0 <= 0){
@@ -195,7 +200,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("ƒ5" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+              //  cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f5 -= damage[i][j];
                 health0 = health_mob_f5;
@@ -207,7 +212,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+              //  cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f5 -= damage[i][j];
                 health0 = health_mob_f5;
                 if(health0 <= 0){
@@ -218,7 +223,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("ƒ6" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+              //  cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f6 -= damage[i][j];
                 health0 = health_mob_f6;
@@ -230,7 +235,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f6 -= damage[i][j];
                 health0 = health_mob_f6;
                 if(health0 <= 0){
@@ -241,7 +246,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("ƒ7" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f7 -= damage[i][j];
                 health0 = health_mob_f7;
@@ -253,7 +258,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f7 -= damage[i][j];
                 health0 = health_mob_f7;
                 if(health0 <= 0){
@@ -264,7 +269,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("ƒ8" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_f8 -= damage[i][j];
                 health0 = health_mob_f8;
@@ -276,7 +281,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+              //  cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_f8 -= damage[i][j];
                 health0 = health_mob_f8;
                 if(health0 <= 0){
@@ -288,7 +293,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
         }
         if ("₩1" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_w1 -= damage[i][j];
                 health0 = health_mob_w1;
@@ -300,7 +305,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_w1 -= damage[i][j];
                 health0 = health_mob_w1;
                 if(health0 <= 0){
@@ -311,7 +316,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("₩2" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_w2 -= damage[i][j];
                 health0 = health_mob_w2;
@@ -323,7 +328,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+              //  cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_w2 -= damage[i][j];
                 health0 = health_mob_w2;
                 if(health0 <= 0){
@@ -334,7 +339,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("₩3" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_w3 -= damage[i][j];
                 health0 = health_mob_w3;
@@ -346,7 +351,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_w3 -= damage[i][j];
                 health0 = health_mob_w3;
                 if(health0 <= 0){
@@ -362,7 +367,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("₩4" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+                //cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_w4 -= damage[i][j];
                 health0 = health_mob_w4;
@@ -374,7 +379,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_w4 -= damage[i][j];
                 health0 = health_mob_w4;
                 if(health0 <= 0){
@@ -385,7 +390,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }
         } else if ("₩5" == map_mobs[i][j]) {
             if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 kdd++;
                 health_mob_w5 -= damage[i][j];
                 health0 = health_mob_w5;
@@ -397,7 +402,7 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
             }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
                 kdd++;
             }else{
-                cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
+               // cout << "Башня нанесла " << damage[i][j] << " урона мобу - " << map_mobs[i][j] << endl;
                 health_mob_w5 -= damage[i][j];
                 health0 = health_mob_w5;
                 if(health0 <= 0){
@@ -464,9 +469,18 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
                     money += money_get;
                 }
             }
-        }
+        }else if ("֏1" == map_mobs[i][j]) {
+
+                health_mob_boff1 -= damage[i][j];
+                health0 = health_mob_boff1;
+                if(health0 <= 0){
+                    map_mobs[i][j] = ".";
+                    map[i][j] = ".";
+                    money += money_get;
+
+            }
     }
-}
+}}
 
 void printMap(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
@@ -498,6 +512,18 @@ void spawnMob_f(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
+void spawnMob_boff(string map[MAP_HEIGHT][MAP_WIDTH]){
+    for (int i = 0; i < MAP_HEIGHT; i++){
+        for (int j = 0; j < MAP_WIDTH; j++){
+            if (map[i][j] == "_"){
+                map[i][j-1] = "֏";
+                map_mobs[i][j-1] =mobs_boff[f];
+                boff++;
+            }
+        }
+    }
+}
+
 void spawnMob_w(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
@@ -510,44 +536,56 @@ void spawnMob_w(string map[MAP_HEIGHT][MAP_WIDTH]){
     }
 }
 
-void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]){
+void moveMobs(string map[MAP_HEIGHT][MAP_WIDTH]) {
 
-    for (int i = 0; i < MAP_HEIGHT; i++){
-        for (int j = 0; j < MAP_WIDTH; j++){
-            if (map[i][j] == "ƒ"){
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            if (map[i][j] == "ƒ") {
                 int money_get = 25;
-                if (map[i][j-1] == "."){
-                    map[i][j-1] = "ƒ";
-                    map_mobs[i][j-1] = map_mobs[i][j];
+                if (map[i][j - 1] == ".") {
+                    map[i][j - 1] = "ƒ";
+                    map_mobs[i][j - 1] = map_mobs[i][j];
                     map[i][j] = ".";
                     map_mobs[i][j] = ".";
-                    towerDamage(i,j-=1,map_mobs,map,money_get);
-                }
-                else if (map[i][j-1] == "|"){
+                    towerDamage(i, j -= 1, map_mobs, map, money_get);
+                } else if (map[i][j - 1] == "|") {
                     map[i][j] = ".";
                     map_mobs[i][j] = ".";
                     ::health -= 1;
                 }
             }
-            if (map[i][j] == "₩"){
+            if (map[i][j] == "₩") {
                 int money_get = 75;
-                if (map[i][j-1] == "."){
-                    map[i][j-1] = "₩";
-                    map_mobs[i][j-1] = map_mobs[i][j];
+                if (map[i][j - 1] == ".") {
+                    map[i][j - 1] = "₩";
+                    map_mobs[i][j - 1] = map_mobs[i][j];
                     map[i][j] = ".";
                     map_mobs[i][j] = ".";
-                    towerDamage(i,j-=1,map_mobs,map,money_get);
-                }
-                else if (map[i][j-1] == "|"){
+                    towerDamage(i, j -= 1, map_mobs, map, money_get);
+                } else if (map[i][j - 1] == "|") {
                     map[i][j] = ".";
                     map_mobs[i][j] = ".";
                     ::health -= 2;
+                }
+
+            }
+            if (map[i][j] == "֏") {
+                int money_get = 666;
+                if (map[i][j - 1] == ".") {
+                    map[i][j - 1] = "֏";
+                    map_mobs[i][j - 1] = map_mobs[i][j];
+                    map[i][j] = ".";
+                    map_mobs[i][j] = ".";
+                    towerDamage(i, j -= 1, map_mobs, map, money_get);
+                } else if (map[i][j - 1] == "|") {
+                    map[i][j] = ".";
+                    map_mobs[i][j] = ".";
+                    ::health -= 5;
                 }
             }
         }
     }
 }
-
 void findTowers(string map[MAP_HEIGHT][MAP_WIDTH]){
     for (int i = 0; i < MAP_HEIGHT; i++){
         for (int j = 0; j < MAP_WIDTH; j++){
@@ -646,37 +684,126 @@ void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place,string tower){
     }
 }
 
-bool endCheck(){
+bool endCheck_game(string map[19][19]){
+    int proverka=0;
     if (::health <= 0) {
         return true;
+        cout<<"Вы проиграли"<<endl;
     }
     else{
+        for (int i = 0; i < MAP_HEIGHT; i++){
+            for (int j = 0; j < MAP_WIDTH; j++){
+                if(map[i][j]=="ƒ" || map[i][j]=="₩" || map[i][j]=="֏"){
+                    proverka++;
+                }
+            }}
+        if(proverka==0) {
+            return true;
+        }
         return false;
     }
 }
 
-void checkingInput() {
-    while(!endCheck()){
+bool endCheck_voln(string map[19][19]){
+    int proverka=0;
+    if (::health <= 0) {
+        return true;
+        cout<<"Вы проиграли"<<endl;
+    }
+    else{
+        for (int i = 0; i < MAP_HEIGHT; i++){
+            for (int j = 0; j < MAP_WIDTH; j++){
+                if(map[i][j]=="ƒ" || map[i][j]=="₩" || map[i][j]=="֏"){
+                    proverka++;
+                }
+            }}
+        if(proverka==0) {
+            return true;
+        }
+        return false;
+    }
+}
+
+void checkingInput(string map[MAP_HEIGHT][MAP_WIDTH]) {
+    while(!endCheck_game(map)){
         cin>>::input;
 
     }
 
 }
 
-void game1_volna2(string map[MAP_HEIGHT][MAP_WIDTH]){
+void game1_volna3(string map[MAP_HEIGHT][MAP_WIDTH]){
     string tower, towerPlace;
-    for(int i =0; i<5;i++){
+        spawnMob_boff(map);
+        for (int i = 0; i < 5; i++) {
+            clearConsole();
+            printMap(map);
+
+            cout << "Ваши деньги: " << money << endl;
+            cout << "Жизнь церкви: " << health << " hp" << endl;
+            cout << endl;
+            cout << "Выберите действие" << endl;
+            cout << "1. Купить башню" << endl;
+            cout << "2. Улучшить башню" << endl;
+            cout << health0 <<endl;
+            cout<< health_mob_boff1<<endl;
+            if (::input == "1") {
+                ::input = "/";
+
+                clearConsole();
+                printMap(map);
+                cout << "Покупка башни" << endl;
+                cout << "Ваши монеты: " << ::money << endl << endl;
+                cout << "1. Огнемёт[@] = 100 монет" << endl;
+                cout << "2. Пушка[&] = 200 монет" << endl;
+                cout << endl << "Выберите башню:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                tower = ::input;
+                cout << "Выберите номер места для башни:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                towerPlace = ::input;
+                if (tower == "1" && ::money >= 100) {
+                    spawnTower(map, towerPlace, tower);
+                    money -= 100;
+                    this_thread::sleep_for(std::chrono::milliseconds(1000));
+                } else if (tower == "2" && ::money >= 250) {
+                    spawnTower(map, towerPlace, tower);
+                    money -= 250;
+                    this_thread::sleep_for(std::chrono::milliseconds(1000));
+                } else {
+                    cout << "Недостаточно монет" << endl;
+                    this_thread::sleep_for(std::chrono::milliseconds(1000));
+                }
+                ::input = " ";
+            } else if (::input == "2") {
+                ::input = "/";
+
+                clearConsole();
+                printMap(map);
+                cout << "Улучшение башни" << endl;
+                cout << "Функция пока не доступна" << endl;
+                this_thread::sleep_for(std::chrono::seconds(2));
+                ::input = " ";
+            } else if (::input == "0") {
+                ::health = 0;
+            }
+            this_thread::sleep_for(std::chrono::milliseconds(250));
+        };
+        moveMobs(map);
+
+    while (!endCheck_voln(map)) {
         clearConsole();
         moveMobs(map);
         printMap(map);
-        spawnMob_w(map);
 
-        cout<<"Ваши монеты: "<<money<<endl;
+        cout<<"Ваши деньги: "<<money<<endl;
         cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
         cout<<endl;
         cout << "Выберите действие" << endl;
         cout<<"1. Купить башню"<<endl;
         cout<<"2. Улучшить башню"<<endl;
+        cout << health0 <<endl;
+        cout<< health_mob_boff1<<endl;
         if(::input == "1"){
             ::input = "/";
 
@@ -718,7 +845,69 @@ void game1_volna2(string map[MAP_HEIGHT][MAP_WIDTH]){
         }
         this_thread::sleep_for(std::chrono::seconds(2));
     }
-    while (!endCheck()) {
+
+}
+
+void game1_volna2(string map[MAP_HEIGHT][MAP_WIDTH]){
+    string tower, towerPlace;
+    for(int i=0; i<5;i++) {
+        spawnMob_w(map);
+
+        for (int i = 0; i < 5; i++) {
+            clearConsole();
+            printMap(map);
+
+            cout << "Ваши деньги: " << money << endl;
+            cout << "Жизнь церкви: " << health << " hp" << endl;
+            cout << endl;
+            cout << "Выберите действие" << endl;
+            cout << "1. Купить башню" << endl;
+            cout << "2. Улучшить башню" << endl;
+            if (::input == "1") {
+                ::input = "/";
+
+                clearConsole();
+                printMap(map);
+                cout << "Покупка башни" << endl;
+                cout << "Ваши монеты: " << ::money << endl << endl;
+                cout << "1. Огнемёт[@] = 100 монет" << endl;
+                cout << "2. Пушка[&] = 200 монет" << endl;
+                cout << endl << "Выберите башню:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                tower = ::input;
+                cout << "Выберите номер места для башни:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                towerPlace = ::input;
+                if (tower == "1" && ::money >= 100) {
+                    spawnTower(map, towerPlace, tower);
+                    money -= 100;
+                    this_thread::sleep_for(std::chrono::milliseconds(1000));
+                } else if (tower == "2" && ::money >= 250) {
+                    spawnTower(map, towerPlace, tower);
+                    money -= 250;
+                    this_thread::sleep_for(std::chrono::milliseconds(1000));
+                } else {
+                    cout << "Недостаточно монет" << endl;
+                    this_thread::sleep_for(std::chrono::milliseconds(1000));
+                }
+                ::input = " ";
+            } else if (::input == "2") {
+                ::input = "/";
+
+                clearConsole();
+                printMap(map);
+                cout << "Улучшение башни" << endl;
+                cout << "Функция пока не доступна" << endl;
+                this_thread::sleep_for(std::chrono::seconds(2));
+                ::input = " ";
+            } else if (::input == "0") {
+                ::health = 0;
+            }
+            this_thread::sleep_for(std::chrono::milliseconds(250));
+        };
+        moveMobs(map);
+    }
+    while (!endCheck_voln(map)) {
         clearConsole();
         moveMobs(map);
         printMap(map);
@@ -778,109 +967,121 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
     string tower, towerPlace;
     ::money = 100;
     for(int i =0; i<5;i++){
-        clearConsole();
         spawnMob_f(map);
-        moveMobs(map);
-        printMap(map);
 
-        cout<<"Ваши монеты: "<<money<<endl;
-        cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
-        cout<<endl;
-        cout << "Выберите действие" << endl;
-        cout<<"1. Купить башню"<<endl;
-        cout<<"2. Улучшить башню"<<endl;
-        if(::input == "1"){
-            ::input = "/";
-
+        for (int i = 0; i < 5; i++){
             clearConsole();
             printMap(map);
-            cout << "Покупка башни" << endl;
-            cout << "Ваши монеты: " << ::money << endl << endl;
-            cout << "1. Огнемёт[@] = 100 монет" << endl;
-            cout << "2. Пушка[&] = 200 монет" <<endl;
-            cout << endl << "Выберите башню:" << endl;
-            this_thread::sleep_for(std::chrono::seconds(3));
-            tower = ::input;
-            cout << "Выберите номер места для башни:" << endl;
-            this_thread::sleep_for(std::chrono::seconds(3));
-            towerPlace = ::input;
-            if (tower == "1" && ::money >= 100){
-                spawnTower(map,towerPlace, tower);
-                money -= 100;
-            }else if(tower == "2" && ::money >= 250) {
-                spawnTower(map, towerPlace, tower);
-                money -= 250;
-            }else{
-                cout << "Недостаточно монет" << endl;
+
+            cout<<"Ваши деньги: "<<money<<endl;
+            cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
+            cout<<endl;
+            cout << "Выберите действие" << endl;
+            cout<<"1. Купить башню"<<endl;
+            cout<<"2. Улучшить башню"<<endl;
+            if(::input == "1"){
+                ::input = "/";
+
+                clearConsole();
+                printMap(map);
+                cout << "Покупка башни" << endl;
+                cout << "Ваши монеты: " << ::money << endl << endl;
+                cout << "1. Огнемёт[@] = 100 монет" << endl;
+                cout << "2. Пушка[&] = 200 монет" <<endl;
+                cout << endl << "Выберите башню:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                tower = ::input;
+                cout << "Выберите номер места для башни:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                towerPlace = ::input;
+                if (tower == "1" && ::money >= 100){
+                    spawnTower(map,towerPlace, tower);
+                    money -= 100;
+                    this_thread::sleep_for(std::chrono::milliseconds (1000));
+                }else if(tower == "2" && ::money >= 250) {
+                    spawnTower(map, towerPlace, tower);
+                    money -= 250;
+                    this_thread::sleep_for(std::chrono::milliseconds (1000));
+                }else{
+                    cout << "Недостаточно монет" << endl;
+                    this_thread::sleep_for(std::chrono::milliseconds (1000));
+                }
+                ::input = " ";
             }
-            ::input = " ";
-        }
-        else if(::input == "2") {
-            ::input = "/";
+            else if(::input == "2") {
+                ::input = "/";
 
-            clearConsole();
-            printMap(map);
-            cout<<"Улучшение башни"<<endl;
-            cout << "Функция пока не доступна" << endl;
-            this_thread::sleep_for(std::chrono::seconds(2));
-            ::input = " ";
-        }
-        else if(::input == "0"){
-            ::health = 0;
-        }
-        this_thread::sleep_for(std::chrono::seconds(2));
+                clearConsole();
+                printMap(map);
+                cout<<"Улучшение башни"<<endl;
+                cout << "Функция пока не доступна" << endl;
+                this_thread::sleep_for(std::chrono::seconds(2));
+                ::input = " ";
+            }
+            else if(::input == "0"){
+                ::health = 0;
+            }
+            this_thread::sleep_for(std::chrono::milliseconds (250));
+        };
+        moveMobs(map);
     }
-    while (!endCheck()) {
-        clearConsole();
+    while (!endCheck_voln(map)) {
         moveMobs(map);
-        printMap(map);
 
-        cout<<"Ваши деньги: "<<money<<endl;
-        cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
-        cout<<endl;
-        cout << "Выберите действие" << endl;
-        cout<<"1. Купить башню"<<endl;
-        cout<<"2. Улучшить башню"<<endl;
-        if(::input == "1"){
-            ::input = "/";
-
+        for (int i = 0; i < 5; i++){
             clearConsole();
             printMap(map);
-            cout << "Покупка башни" << endl;
-            cout << "Ваши монеты: " << ::money << endl << endl;
-            cout << "1. Огнемёт[@] = 100 монет" << endl;
-            cout << "2. Пушка[&] = 200 монет" <<endl;
-            cout << endl << "Выберите башню:" << endl;
-            this_thread::sleep_for(std::chrono::seconds(3));
-            tower = ::input;
-            cout << "Выберите номер места для башни:" << endl;
-            this_thread::sleep_for(std::chrono::seconds(3));
-            towerPlace = ::input;
-            if (tower == "1" && ::money >= 100){
-                spawnTower(map,towerPlace, tower);
-                money -= 100;
-            }else if(tower == "2" && ::money >= 250) {
-                spawnTower(map, towerPlace, tower);
-                money -= 250;
-            }else{
-                cout << "Недостаточно монет" << endl;
+
+            cout<<"Ваши деньги: "<<money<<endl;
+            cout<<"Жизнь церкви: "<<health<<" hp"<<endl;
+            cout<<endl;
+            cout << "Выберите действие" << endl;
+            cout<<"1. Купить башню"<<endl;
+            cout<<"2. Улучшить башню"<<endl;
+            if(::input == "1"){
+                ::input = "/";
+
+                clearConsole();
+                printMap(map);
+                cout << "Покупка башни" << endl;
+                cout << "Ваши монеты: " << ::money << endl << endl;
+                cout << "1. Огнемёт[@] = 100 монет" << endl;
+                cout << "2. Пушка[&] = 200 монет" <<endl;
+                cout << endl << "Выберите башню:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                tower = ::input;
+                cout << "Выберите номер места для башни:" << endl;
+                this_thread::sleep_for(std::chrono::seconds(3));
+                towerPlace = ::input;
+                if (tower == "1" && ::money >= 100){
+                    spawnTower(map,towerPlace, tower);
+                    money -= 100;
+                    this_thread::sleep_for(std::chrono::milliseconds (1000));
+                }else if(tower == "2" && ::money >= 250) {
+                    spawnTower(map, towerPlace, tower);
+                    money -= 250;
+                    this_thread::sleep_for(std::chrono::milliseconds (1000));
+                }else{
+                    cout << "Недостаточно монет" << endl;
+                    this_thread::sleep_for(std::chrono::milliseconds (1000));
+                }
+                ::input = " ";
             }
-            ::input = " ";
-        }
-        else if(::input == "2") {
-            ::input = "/";
+            else if(::input == "2") {
+                ::input = "/";
 
-            clearConsole();
-            printMap(map);
-            cout<<"Улучшение башни"<<endl;
-            cout << "Функция пока не доступна" << endl;
-            this_thread::sleep_for(std::chrono::seconds(2));
-            ::input = " ";
-        }
-        else if(::input == "0"){
-            ::health = 0;
-        }
-        this_thread::sleep_for(std::chrono::seconds(2));
+                clearConsole();
+                printMap(map);
+                cout<<"Улучшение башни"<<endl;
+                cout << "Функция пока не доступна" << endl;
+                this_thread::sleep_for(std::chrono::seconds(2));
+                ::input = " ";
+            }
+            else if(::input == "0"){
+                ::health = 0;
+            }
+            this_thread::sleep_for(std::chrono::milliseconds (250));
+        };
     }
 }
 
@@ -915,10 +1116,12 @@ int main() {
                     << endl;
             this_thread::sleep_for(std::chrono::seconds(3));
             cout << "Введите любой символ чтобы продолжить: "; cin >> input;
-            thread secondThread(checkingInput);
+            thread secondThread(checkingInput, map);
             ::input = " ";
             findTowers(map);
             runningGame(map);
+            game1_volna2(map);
+            game1_volna3(map);
             secondThread.join();
         }
         else if(input == "2"){
@@ -929,9 +1132,11 @@ int main() {
             cout << endl << "Выберите пункт меню: "; cin >> input;
 
             if (input == "1"){
-                thread secondThread(checkingInput);
+                thread secondThread(checkingInput,map);
                 input = "/";
                 runningGame(map);
+                game1_volna2(map);
+                game1_volna3(map);
                 secondThread.join();
             }
         }
