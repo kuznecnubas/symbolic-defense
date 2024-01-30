@@ -637,6 +637,12 @@ void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place,string tower){
     }
     else{
         cout << "Выбранное место занято или такого нету" << endl;
+        if (tower == "1"){
+            money += 100;
+        }
+        else if (tower == "2"){
+            money += 250;
+        }
     }
 }
 
