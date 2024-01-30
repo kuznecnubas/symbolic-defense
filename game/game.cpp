@@ -598,9 +598,6 @@ void spawnTower(string map[MAP_HEIGHT][MAP_WIDTH], string place,string tower){
                         placen="0";
                     }
                 }
-
-            }else{
-                cout<<"Это место занято"<<endl;
             }
         }
     }
