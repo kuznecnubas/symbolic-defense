@@ -755,9 +755,7 @@ void game1_volna3(string map[MAP_HEIGHT][MAP_WIDTH]){
             cout << endl;
             cout << "Выберите действие" << endl;
             cout << "1. Купить башню" << endl;
-            cout << "2. Улучшить башню" << endl;
-            cout << health0 <<endl;
-            cout<< health_mob_boff1<<endl;
+            cout<< "Жизнь босса: "<< health_mob_boff1<<endl;
             if (::input == "1") {
                 ::input = "/";
 
