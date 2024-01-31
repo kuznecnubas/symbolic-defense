@@ -470,14 +470,25 @@ void towerDamage(int i, int j, string map_mobs[MAP_HEIGHT][MAP_WIDTH],string map
                 }
             }
         }else if ("֏1" == map_mobs[i][j]) {
-
+            if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2==0){
+                kdd++;
                 health_mob_boff1 -= damage[i][j];
                 health0 = health_mob_boff1;
                 if(health0 <= 0){
                     map_mobs[i][j] = ".";
                     map[i][j] = ".";
                     money += money_get;
-
+                }
+            }else if((map[i+1][j]=="&") || (map[i-1][j]=="&") && kd[kdd]%2!=0){
+                kdd++;
+            }else{
+                health_mob_boff1 -= damage[i][j];
+                health0 = health_mob_boff1;
+                if(health0 <= 0){
+                    map_mobs[i][j] = ".";
+                    map[i][j] = ".";
+                    money += money_get;
+                }
             }
     }
 }}
@@ -517,7 +528,7 @@ void spawnMob_boff(string map[MAP_HEIGHT][MAP_WIDTH]){
         for (int j = 0; j < MAP_WIDTH; j++){
             if (map[i][j] == "_"){
                 map[i][j-1] = "֏";
-                map_mobs[i][j-1] =mobs_boff[f];
+                map_mobs[i][j-1] =mobs_boff[boff];
                 boff++;
             }
         }
@@ -801,9 +812,7 @@ void game1_volna3(string map[MAP_HEIGHT][MAP_WIDTH]){
         cout<<endl;
         cout << "Выберите действие" << endl;
         cout<<"1. Купить башню"<<endl;
-        cout<<"2. Улучшить башню"<<endl;
-        cout << health0 <<endl;
-        cout<< health_mob_boff1<<endl;
+        cout<< "Жизнь босса: "<< health_mob_boff1<<endl;
         if(::input == "1"){
             ::input = "/";
 
@@ -830,16 +839,6 @@ void game1_volna3(string map[MAP_HEIGHT][MAP_WIDTH]){
             }
             ::input = " ";
         }
-        else if(::input == "2") {
-            ::input = "/";
-
-            clearConsole();
-            printMap(map);
-            cout<<"Улучшение башни"<<endl;
-            cout << "Функция пока не доступна" << endl;
-            this_thread::sleep_for(std::chrono::seconds(2));
-            ::input = " ";
-        }
         else if(::input == "0"){
             ::health = 0;
         }
@@ -862,7 +861,6 @@ void game1_volna2(string map[MAP_HEIGHT][MAP_WIDTH]){
             cout << endl;
             cout << "Выберите действие" << endl;
             cout << "1. Купить башню" << endl;
-            cout << "2. Улучшить башню" << endl;
             if (::input == "1") {
                 ::input = "/";
 
@@ -891,16 +889,8 @@ void game1_volna2(string map[MAP_HEIGHT][MAP_WIDTH]){
                     this_thread::sleep_for(std::chrono::milliseconds(1000));
                 }
                 ::input = " ";
-            } else if (::input == "2") {
-                ::input = "/";
-
-                clearConsole();
-                printMap(map);
-                cout << "Улучшение башни" << endl;
-                cout << "Функция пока не доступна" << endl;
-                this_thread::sleep_for(std::chrono::seconds(2));
-                ::input = " ";
-            } else if (::input == "0") {
+            }
+            else if (::input == "0") {
                 ::health = 0;
             }
             this_thread::sleep_for(std::chrono::milliseconds(250));
@@ -917,7 +907,6 @@ void game1_volna2(string map[MAP_HEIGHT][MAP_WIDTH]){
         cout<<endl;
         cout << "Выберите действие" << endl;
         cout<<"1. Купить башню"<<endl;
-        cout<<"2. Улучшить башню"<<endl;
         if(::input == "1"){
             ::input = "/";
 
@@ -944,16 +933,6 @@ void game1_volna2(string map[MAP_HEIGHT][MAP_WIDTH]){
             }
             ::input = " ";
         }
-        else if(::input == "2") {
-            ::input = "/";
-
-            clearConsole();
-            printMap(map);
-            cout<<"Улучшение башни"<<endl;
-            cout << "Функция пока не доступна" << endl;
-            this_thread::sleep_for(std::chrono::seconds(2));
-            ::input = " ";
-        }
         else if(::input == "0"){
             ::health = 0;
         }
@@ -978,7 +957,6 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
             cout<<endl;
             cout << "Выберите действие" << endl;
             cout<<"1. Купить башню"<<endl;
-            cout<<"2. Улучшить башню"<<endl;
             if(::input == "1"){
                 ::input = "/";
 
@@ -1006,16 +984,6 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
                     cout << "Недостаточно монет" << endl;
                     this_thread::sleep_for(std::chrono::milliseconds (1000));
                 }
-                ::input = " ";
-            }
-            else if(::input == "2") {
-                ::input = "/";
-
-                clearConsole();
-                printMap(map);
-                cout<<"Улучшение башни"<<endl;
-                cout << "Функция пока не доступна" << endl;
-                this_thread::sleep_for(std::chrono::seconds(2));
                 ::input = " ";
             }
             else if(::input == "0"){
@@ -1037,7 +1005,6 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
             cout<<endl;
             cout << "Выберите действие" << endl;
             cout<<"1. Купить башню"<<endl;
-            cout<<"2. Улучшить башню"<<endl;
             if(::input == "1"){
                 ::input = "/";
 
@@ -1065,16 +1032,6 @@ void runningGame(string map[MAP_HEIGHT][MAP_WIDTH]){
                     cout << "Недостаточно монет" << endl;
                     this_thread::sleep_for(std::chrono::milliseconds (1000));
                 }
-                ::input = " ";
-            }
-            else if(::input == "2") {
-                ::input = "/";
-
-                clearConsole();
-                printMap(map);
-                cout<<"Улучшение башни"<<endl;
-                cout << "Функция пока не доступна" << endl;
-                this_thread::sleep_for(std::chrono::seconds(2));
                 ::input = " ";
             }
             else if(::input == "0"){
@@ -1102,7 +1059,7 @@ int main() {
         cout << "Символьная оборона" << endl;
         cout << endl;
         cout << "1. Играть"<<endl;
-        cout << "2. Выбор уровня"<<endl;
+        cout<< "2. Туториал"<<endl;
         cout << "0. Выход"<<endl;
         cout << endl;
         cout << "Выберите пункт меню: "; cin >> input;
@@ -1124,23 +1081,20 @@ int main() {
             game1_volna3(map);
             secondThread.join();
         }
-        else if(input == "2"){
+        if(input == "2") {
             clearConsole();
-            cout << "Выбор уровня" << endl;
-            cout << endl << "1. Первый уровень" << endl;
-            cout << "0. Выход в главное меню" << endl;
-            cout << endl << "Выберите пункт меню: "; cin >> input;
-
-            if (input == "1"){
-                thread secondThread(checkingInput,map);
-                input = "/";
-                runningGame(map);
-                game1_volna2(map);
-                game1_volna3(map);
-                secondThread.join();
-            }
-        }
-        else if(input == "0"){
+            cout<<"Ваша цель защитить церковь от кодов, у церкви 5 хп, каждый код наносит свой урон, это относится и к башням."<< endl;
+            cout<<endl;
+            cout<<"Башни:" << endl;
+            cout<<"Огнемет работает по радиусу 3х3." << endl;
+            cout<<"Пушка работает через ход(то есть в одно моба стрельнула, одного пропустила и снова стрельнула) и направлено - только на перед стоящуюю клетку."<< endl;
+            cout<<endl;
+            cout<<"Игра работает в реальном времени, поэтому нужно быстрее думать. При покупке башни, вводить нужно не спешно, но и при этом у вас есть по 3 секунды, что бы выбрать нужную пушку и место для нее."<< endl;
+            cout<<endl;
+            this_thread::sleep_for(std::chrono::seconds(3));
+            cout<<"Введите любой символ чтобы продолжить: ";
+            cin>>input;
+        }else if(input == "0"){
             return 0;
         }
     }
